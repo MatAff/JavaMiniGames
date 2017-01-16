@@ -28,13 +28,11 @@ public class Star extends Sprite {
         // Set dx, dy based on direction
         dx = (Math.sin(Math.toRadians(direction)) * size);
         dy = (Math.cos(Math.toRadians(direction)) * size);
-        System.out.println(dx);
-        System.out.println(dy);
         
     }    
     
     private void initStar() {      
-        loadImage("redsquare.png");
+        loadImage("redcircle.png");
         getImageDimensions();
     }
 

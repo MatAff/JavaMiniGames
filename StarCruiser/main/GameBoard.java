@@ -18,7 +18,8 @@ import javax.swing.Timer;
 public class GameBoard extends JPanel implements ActionListener {
 
     private Timer timer;
-    private Star star;
+    //private Star star;
+    private ArrayList<Star> stars;
     private boolean ingame;
     //private final int ISTAR_X = 40;
     //private final int ISTAR_Y = 60;
@@ -33,6 +34,7 @@ public class GameBoard extends JPanel implements ActionListener {
     private void initBoard() {
 
         int randomDirection;
+        Star star;
         
         addKeyListener(new TAdapter());
         setFocusable(true);
@@ -40,9 +42,16 @@ public class GameBoard extends JPanel implements ActionListener {
         ingame = true;
         
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+        
+        // Initiate array list
+        stars = new ArrayList<>();
 
-        randomDirection = (int)(Math.random() * 360);
-        star = new Star(B_WIDTH / 2 - 25, B_HEIGHT / 2 - 25, 1, randomDirection);       // Start in middle of screen
+        // Add a number of stars
+        for(int i = 0; i < 5; i++) {
+            randomDirection = (int)(Math.random() * 360);
+            star = new Star(B_WIDTH / 2 - 25, B_HEIGHT / 2 - 25, 1, randomDirection);
+            stars.add(star);       
+        }
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -66,9 +75,11 @@ public class GameBoard extends JPanel implements ActionListener {
 
     private void drawObjects(Graphics g) {
 
-        if (star.isVisible()) {
-            //g.drawImage(star.getImage(), star.getX(), star.getY(),this);
-            g.drawImage(star.getImage(), (int) star.getX(), (int) star.getY(), (int) star.getX() + (int) star.getSize(), (int) star.getY() + (int) star.getSize(), 0,0,star.getWidth(), star.getHeight(), this);
+        for(Star star : stars) {
+            if (star.isVisible()) {
+                //g.drawImage(star.getImage(), star.getX(), star.getY(),this);
+                g.drawImage(star.getImage(), (int) star.getX(), (int) star.getY(), (int) star.getX() + (int) star.getSize(), (int) star.getY() + (int) star.getSize(), 0,0,star.getWidth(), star.getHeight(), this);
+            }
         }
 
     }
@@ -89,7 +100,9 @@ public class GameBoard extends JPanel implements ActionListener {
 
         inGame();
 
-        updateStar();
+        for(Star star : stars) {
+            updateStar();
+        }
 
         repaint();
     }
@@ -103,15 +116,19 @@ public class GameBoard extends JPanel implements ActionListener {
 
     private void updateStar() {
 
-        if (star.isVisible()) {
-            star.move();
-            star.grow();
+        for(Star star : stars) {
+            if (star.isVisible()) {
+                star.move();
+                star.grow();    
+            }
         }
     }
 
+
+    
     private class TAdapter extends KeyAdapter {
 
-        @Override
+        /*@Override
         public void keyReleased(KeyEvent e) {
             star.keyReleased(e);
         }
@@ -119,6 +136,6 @@ public class GameBoard extends JPanel implements ActionListener {
         @Override
         public void keyPressed(KeyEvent e) {
             star.keyPressed(e);
-        }
-    }
+        }*/
+    } 
 }
