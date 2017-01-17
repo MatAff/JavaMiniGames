@@ -26,13 +26,13 @@ public class Star extends Sprite {
         initStar();
         
         // Set dx, dy based on direction
-        dx = (Math.sin(Math.toRadians(direction)) * size);
-        dy = (Math.cos(Math.toRadians(direction)) * size);
+        dx = (Math.sin(Math.toRadians(direction)) * size/10);
+        dy = (Math.cos(Math.toRadians(direction)) * size/10);
         
     }    
     
     private void initStar() {      
-        loadImage("redcircle.png");
+        loadImage("redball.png");
         getImageDimensions();
     }
 
@@ -41,17 +41,15 @@ public class Star extends Sprite {
         x += dx;
         y += dy;
 
-        //if (x < 1) {
-        //    x = 1;
-        //}
-
-        //if (y < 1) {
-        //    y = 1;
-        //}
     }
 
     public void grow() {
-        size *= 1.01;
+        dx *= 1.0025;
+        dy *= 1.0025;
+        x -= 0.05;
+        y -= 0.05;
+        size += 0.1;
+        
     }
     
     public void keyPressed(KeyEvent e) {

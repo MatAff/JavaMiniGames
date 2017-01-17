@@ -30,7 +30,7 @@ public class Sprite {
     protected void getImageDimensions() {
         width = image.getWidth(null);
         height = image.getHeight(null);
-        size = image.getWidth(null);
+        //size = image.getWidth(null);
     }
 
     protected void loadImage(String imageName) {

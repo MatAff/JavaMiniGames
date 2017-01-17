@@ -23,8 +23,8 @@ public class GameBoard extends JPanel implements ActionListener {
     private boolean ingame;
     //private final int ISTAR_X = 40;
     //private final int ISTAR_Y = 60;
-    private final int B_WIDTH = 400;
-    private final int B_HEIGHT = 300;
+    private final int B_WIDTH = 1200;
+    private final int B_HEIGHT = 900;
     private final int DELAY = 15;   
 
     public GameBoard() {
@@ -32,9 +32,6 @@ public class GameBoard extends JPanel implements ActionListener {
     }
 
     private void initBoard() {
-
-        int randomDirection;
-        Star star;
         
         addKeyListener(new TAdapter());
         setFocusable(true);
@@ -47,16 +44,24 @@ public class GameBoard extends JPanel implements ActionListener {
         stars = new ArrayList<>();
 
         // Add a number of stars
-        for(int i = 0; i < 5; i++) {
-            randomDirection = (int)(Math.random() * 360);
-            star = new Star(B_WIDTH / 2 - 25, B_HEIGHT / 2 - 25, 1, randomDirection);
-            stars.add(star);       
+        for(int i = 0; i < 1; i++) {
+            addStar();
         }
 
         timer = new Timer(DELAY, this);
         timer.start();
     }
 
+    private void addStar() {
+             
+        int randomDirection;
+        Star star;
+        
+        randomDirection = (int)(Math.random() * 360);
+        star = new Star(B_WIDTH / 2 - 25, B_HEIGHT / 2 - 25, 1, randomDirection);
+        stars.add(star);       
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -103,6 +108,15 @@ public class GameBoard extends JPanel implements ActionListener {
         for(Star star : stars) {
             updateStar();
         }
+        
+        // Add new
+        if (Math.random()<0.1) {
+            addStar();
+            //System.out.println("Adding star");
+        }
+        
+        // Check for stars to remove
+        removeStars();
 
         repaint();
     }
@@ -116,14 +130,29 @@ public class GameBoard extends JPanel implements ActionListener {
 
     private void updateStar() {
 
+        // Update position
         for(Star star : stars) {
             if (star.isVisible()) {
                 star.move();
-                star.grow();    
+                star.grow();               
             }
         }
+        
+        
     }
 
+    private void removeStars() {
+        Star star;
+        
+        for(int i = stars.size()-1; i >=0; i--) {
+            star = stars.get(i);
+            if(Math.abs(star.getX()) > B_WIDTH || Math.abs(star.getY()) > B_WIDTH) {
+                stars.remove(i);
+                //System.out.println("Removing star");
+            }
+        }
+        
+    }
 
     
     private class TAdapter extends KeyAdapter {
