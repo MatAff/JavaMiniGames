@@ -1,18 +1,6 @@
 #BlueJ class context
-comment0.params=x\ y
-comment0.target=Star(double,\ double)
-comment1.params=x\ y\ size
-comment1.target=Star(double,\ double,\ double)
-comment2.params=x\ y\ size\ direction
-comment2.target=Star(double,\ double,\ double,\ int)
-comment3.params=
-comment3.target=void\ initStar()
-comment4.params=
-comment4.target=void\ move()
-comment5.params=
-comment5.target=void\ grow()
-comment6.params=e
-comment6.target=void\ keyPressed(java.awt.event.KeyEvent)
-comment7.params=e
-comment7.target=void\ keyReleased(java.awt.event.KeyEvent)
-numComments=8
+comment0.params=x\ y\ size\ dx\ dy
+comment0.target=Star(double,\ double,\ double,\ double,\ double)
+comment1.params=
+comment1.target=void\ initStar()
+numComments=2

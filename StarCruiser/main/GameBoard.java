@@ -18,11 +18,8 @@ import javax.swing.Timer;
 public class GameBoard extends JPanel implements ActionListener {
 
     private Timer timer;
-    //private Star star;
     private ArrayList<Star> stars;
     private boolean ingame;
-    //private final int ISTAR_X = 40;
-    //private final int ISTAR_Y = 60;
     private final int B_WIDTH = 1200;
     private final int B_HEIGHT = 900;
     private final int DELAY = 15;   
@@ -37,7 +34,6 @@ public class GameBoard extends JPanel implements ActionListener {
         setFocusable(true);
         setBackground(Color.BLACK);
         ingame = true;
-        
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         
         // Initiate array list
@@ -53,12 +49,29 @@ public class GameBoard extends JPanel implements ActionListener {
     }
 
     private void addStar() {
-             
-        int randomDirection;
+        
+        double xPos;
+        double yPos;
+        double size;
+        double dx;
+        double dy;
         Star star;
         
-        randomDirection = (int)(Math.random() * 360);
-        star = new Star(B_WIDTH / 2 - 25, B_HEIGHT / 2 - 25, 1, randomDirection);
+        // Postion
+        xPos = (Math.random() * B_WIDTH);
+        yPos = (Math.random() * B_HEIGHT);
+
+        // Size
+        size = 10; 
+        
+        // Compute direction
+        //dx = xPos - B_WIDTH/2;
+        //dy = yPos - B_HEIGHT/2;
+        dx = Math.random();
+        dy = Math.random();
+                
+        // Create start and add
+        star = new Star(xPos, yPos, size, dx, dy);
         stars.add(star);       
     }
     
@@ -83,7 +96,7 @@ public class GameBoard extends JPanel implements ActionListener {
         for(Star star : stars) {
             if (star.isVisible()) {
                 //g.drawImage(star.getImage(), star.getX(), star.getY(),this);
-                g.drawImage(star.getImage(), (int) star.getX(), (int) star.getY(), (int) star.getX() + (int) star.getSize(), (int) star.getY() + (int) star.getSize(), 0,0,star.getWidth(), star.getHeight(), this);
+                g.drawImage(star.getImage(), (int) star.getX(), (int) star.getY(), (int) star.getX() + (int) star.getXSize(), (int) star.getY() + (int) star.getYSize(), 0,0,star.getImageWidth(), star.getImageHeight(), this);
             }
         }
 
@@ -112,7 +125,6 @@ public class GameBoard extends JPanel implements ActionListener {
         // Add new
         if (Math.random()<0.1) {
             addStar();
-            //System.out.println("Adding star");
         }
         
         // Check for stars to remove
@@ -134,7 +146,7 @@ public class GameBoard extends JPanel implements ActionListener {
         for(Star star : stars) {
             if (star.isVisible()) {
                 star.move();
-                star.grow();               
+                //star.grow();               
             }
         }
         
@@ -148,7 +160,6 @@ public class GameBoard extends JPanel implements ActionListener {
             star = stars.get(i);
             if(Math.abs(star.getX()) > B_WIDTH || Math.abs(star.getY()) > B_WIDTH) {
                 stars.remove(i);
-                //System.out.println("Removing star");
             }
         }
         

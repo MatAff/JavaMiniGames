@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=x\ y
+comment0.target=MovingSprite(double,\ double)
+comment1.params=x\ y\ size
+comment1.target=MovingSprite(double,\ double,\ double)
+comment2.params=x\ y\ xSize\ ySize
+comment2.target=MovingSprite(double,\ double,\ double,\ double)
+comment3.params=x\ y\ xSize\ ySize\ dx\ dy
+comment3.target=MovingSprite(double,\ double,\ double,\ double,\ double,\ double)
+comment4.params=
+comment4.target=void\ move()
+numComments=5

@@ -6,36 +6,43 @@ import javax.swing.ImageIcon;
 
 public class Sprite {
 
+    // Image
+    protected Image image;
+    protected int imageWidth;
+    protected int imageHeight;
+    protected boolean vis;
+
+    // Position and size
     protected double x;
     protected double y;
-    protected double size;
-    protected int width;
-    protected int height;
-    protected boolean vis;
-    protected Image image;
-
+    protected double xSize;
+    protected double ySize;
+    
+    // Constructor
     public Sprite(double x, double y) {
         this.x = x;
         this.y = y;
         vis = true;
     }
     
-    public Sprite(double x, double y, double size) {
+    // Constructor
+    public Sprite(double x, double y, double xSize, double ySize) {
         this.x = x;
         this.y = y;
-        this.size = size;
+        this.xSize = xSize;
+        this.ySize = ySize;
         vis = true;
     }
 
-    protected void getImageDimensions() {
-        width = image.getWidth(null);
-        height = image.getHeight(null);
-        //size = image.getWidth(null);
-    }
-
+    // Load image
     protected void loadImage(String imageName) {
         ImageIcon ii = new ImageIcon(imageName);
         image = ii.getImage();
+    }
+
+    protected void getImageDimensions() {
+        imageWidth = image.getWidth(null);
+        imageHeight = image.getHeight(null);
     }
 
     public Image getImage() {
@@ -50,16 +57,20 @@ public class Sprite {
         return y;
     }
     
-    public double getSize() {
-        return size;
+    public double getXSize() {
+        return xSize;
+    }
+
+    public double getYSize() {
+        return ySize;
     }
     
-    public int getWidth() {
-        return width;
+    public int getImageWidth() {
+        return imageWidth;
     }
     
-    public int getHeight() {
-        return height;
+    public int getImageHeight() {
+        return imageHeight;
     }
 
     public boolean isVisible() {
@@ -71,6 +82,6 @@ public class Sprite {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle((int) x, (int) y, width, height);
+        return new Rectangle((int) x, (int) y, (int) xSize, (int) ySize);
     }
 }
