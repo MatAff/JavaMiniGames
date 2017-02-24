@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=p1\ p2
+comment0.target=Line(Point,\ Point)
+comment1.params=
+comment1.target=void\ computeXY()
+comment2.params=
+comment2.target=double[]\ getXY()
+comment3.params=
+comment3.target=double[]\ getXYOther()
+comment4.params=dx\ dy\ dz
+comment4.target=void\ move(double,\ double,\ double)
+comment5.params=rx\ ry\ rz
+comment5.target=void\ rotate(double,\ double,\ double)
+comment6.params=
+comment6.target=boolean\ containsNegativeZ()
+numComments=7

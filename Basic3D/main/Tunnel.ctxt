@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Tunnel()
+comment1.params=rect\ offset
+comment1.target=java.util.ArrayList\ createConnectRectangle(java.util.ArrayList,\ Vector)
+comment10.params=
+comment10.target=java.util.ArrayList\ getLines()
+comment2.params=rect1\ rect2
+comment2.target=void\ connectTwoRectangles(java.util.ArrayList,\ java.util.ArrayList)
+comment3.params=rect
+comment3.target=void\ connectRectangle(java.util.ArrayList)
+comment4.params=rect\ vec
+comment4.target=java.util.ArrayList\ offsetRectangle(java.util.ArrayList,\ Vector)
+comment5.params=x1\ y1\ x2\ y2\ z
+comment5.target=java.util.ArrayList\ createRectangle(double,\ double,\ double,\ double,\ double)
+comment6.params=dx\ dy\ dz
+comment6.target=void\ move(double,\ double,\ double)
+comment7.params=rx\ ry\ rz
+comment7.target=void\ rotate(double,\ double,\ double)
+comment8.params=
+comment8.target=void\ remove()
+comment9.params=
+comment9.target=void\ addSegment()
+numComments=11

@@ -6,9 +6,9 @@ import java.util.ArrayList;
 public class MovingSprite extends Sprite {
 
     // Direction
-    private double dx;
-    private double dy;
-    private double speed;
+    protected double dx;
+    protected double dy;
+    //protected double speed;
 
     public MovingSprite(double x, double y) {
         super(x, y);
@@ -27,17 +27,17 @@ public class MovingSprite extends Sprite {
         this.dx = dx;
         this.dy = dy;
     }  
-    
-    
+        
     public void move() {
         x += dx;
         y += dy;
-        dx *= 1.005;
-        dy *= 1.005;
     }
     
-    public void grow() {
-        xSize += 1.005;
-        ySize += 1.005;
+    public double getDX() {
+        return dx;
+    }
+    
+    public double getDY() {
+        return dy;
     }
 }

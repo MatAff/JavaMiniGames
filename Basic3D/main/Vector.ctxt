@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=dx\ dy\ dz
+comment0.target=Vector(double,\ double,\ double)
+comment1.params=p1\ p2
+comment1.target=Vector(Point,\ Point)
+comment2.params=
+comment2.target=double\ getDX()
+comment3.params=
+comment3.target=double\ getDY()
+comment4.params=
+comment4.target=double\ getDZ()
+comment5.params=
+comment5.target=java.lang.String\ toString()
+comment6.params=other
+comment6.target=Vector\ crossProduct(Vector)
+comment7.params=l
+comment7.target=void\ setLength(double)
+numComments=8

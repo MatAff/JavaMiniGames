@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=x\ y
+comment0.target=Person(double,\ double)
+comment1.params=x\ y\ size
+comment1.target=Person(double,\ double,\ double)
+comment2.params=x\ y\ size\ dx\ dy
+comment2.target=Person(double,\ double,\ double,\ double,\ double)
+comment3.params=
+comment3.target=void\ initPerson()
+comment4.params=xAim\ yAim
+comment4.target=void\ setAim(double,\ double)
+comment5.params=xAim\ yAim\ speed
+comment5.target=void\ setAim(double,\ double,\ double)
+comment6.params=
+comment6.target=void\ updateDirection()
+comment7.params=people
+comment7.target=void\ avoid(java.util.ArrayList)
+numComments=8

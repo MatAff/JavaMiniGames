@@ -18,10 +18,10 @@ import javax.swing.Timer;
 public class GameBoard extends JPanel implements ActionListener {
 
     private Timer timer;
-    private ArrayList<Star> stars;
+    private ArrayList<Person> people;
     private boolean ingame;
-    private final int B_WIDTH = 1200;
-    private final int B_HEIGHT = 900;
+    private final int B_WIDTH = 600;
+    private final int B_HEIGHT = 400;
     private final int DELAY = 15;   
 
     public GameBoard() {
@@ -37,56 +37,52 @@ public class GameBoard extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         
         // Initiate array list
-        stars = new ArrayList<>();
+        people = new ArrayList<>();
 
         // Add a number of stars
         for(int i = 0; i < 1; i++) {
-            addStar();
+            addPerson();
         }
 
         timer = new Timer(DELAY, this);
         timer.start();
+        
+        System.out.println("Start new run");
     }
 
-    private void addStar() {
+    private void addPerson() {
         
         double xPos;
         double yPos;
-        double size;
-        double dxToMid;
-        double dyToMid;
-        double distToMid;
-        double diagonal;
-        double dx;
-        double dy;
-        Star star;
+        double aimX;
+        double aimY;
+        double speed;
+        Person person;
         
         // Postion
-        xPos = (Math.random() * B_WIDTH);
-        yPos = (Math.random() * B_HEIGHT);
+        // xPos = B_WIDTH * Math.random();
+        // yPos = 0;
+        // aimX = B_WIDTH * Math.random();
+        // aimY = B_HEIGHT;
 
-        // Size
-        size = 1; 
+        speed = Math.random() * 4 + 1;
         
-        // Random direction
-        //dx = Math.random() - 0.5;
-        //dy = Math.random() - 0.5;
-                        
-        // Direction and speed based on position
-        dxToMid = xPos - B_WIDTH/2;
-        dyToMid = yPos - B_HEIGHT/2;
-        distToMid = Math.sqrt(dxToMid * dxToMid + dyToMid * dyToMid);
-        diagonal = Math.sqrt(B_WIDTH * B_WIDTH / 4 + B_HEIGHT * B_HEIGHT / 4);
-        dx = Math.signum(dxToMid) * (diagonal - Math.abs(distToMid)) / B_WIDTH;
-        dy = Math.signum(dyToMid) * (diagonal - Math.abs(distToMid)) / B_WIDTH;
-        
-        // 400
-        // 0 > -200 200 - 200 = 0
-        // 400
+        if(Math.random() < 0.5) {
+            xPos = 0;
+            yPos = 0;
+            aimX = B_WIDTH;
+            aimY = B_HEIGHT + 100;
+        } else {
+            xPos = B_WIDTH;
+            yPos = 0;
+            aimX = 0;
+            aimY = B_HEIGHT + 100;
+        }
         
         // Create start and add
-        star = new Star(xPos, yPos, size * (diagonal - Math.abs(distToMid)) / diagonal, dx, dy);
-        stars.add(star);       
+        person = new Person(xPos, yPos, 20);
+        person.setAim(aimX, aimY, speed);
+        people.add(person);       
     }
     
     @Override
@@ -107,10 +103,10 @@ public class GameBoard extends JPanel implements ActionListener {
 
     private void drawObjects(Graphics g) {
 
-        for(Star star : stars) {
-            if (star.isVisible()) {
-                //g.drawImage(star.getImage(), star.getX(), star.getY(),this);
-                g.drawImage(star.getImage(), (int) star.getX() - (int) star.getXSize()/2, (int) star.getY() - (int) star.getYSize()/2, (int) star.getX() + (int) star.getXSize()/2, (int) star.getY() + (int) star.getYSize()/2, 0,0,star.getImageWidth(), star.getImageHeight(), this);
+        for(Sprite s : people) {
+            if (s.isVisible()) {
+                //g.drawImage(person.getImage(), (int)s.getX(), (int)s.getY(),this);
+                g.drawImage(s.getImage(), (int) s.getX() - (int) s.getXSize()/2, (int) s.getY() - (int) s.getYSize()/2, (int) s.getX() + (int) s.getXSize()/2, (int) s.getY() + (int) s.getYSize()/2, 0,0,s.getImageWidth(), s.getImageHeight(), this);
             }
         }
 
@@ -132,18 +128,21 @@ public class GameBoard extends JPanel implements ActionListener {
 
         inGame();
 
-        for(Star star : stars) {
-            updateStar();
+        // Update
+        for(Person person : people) {
+            person.updateDirection();
+            person.avoid(people);
+            person.move();
         }
         
         // Add new
-        if (Math.random()<0.1) {
-            addStar();
+        if (Math.random()<0.05) {
+            addPerson();
         }
         
         // Check for stars to remove
-        removeStars();
-
+        removePeople();
+        
         repaint();
     }
 
@@ -154,32 +153,18 @@ public class GameBoard extends JPanel implements ActionListener {
         }
     }
 
-    private void updateStar() {
-
-        // Update position
-        for(Star star : stars) {
-            if (star.isVisible()) {
-                star.move();
-                star.grow();               
-            }
-        }
+    private void removePeople() {
+        Person person;
         
-        
-    }
-
-    private void removeStars() {
-        Star star;
-        
-        for(int i = stars.size()-1; i >=0; i--) {
-            star = stars.get(i);
-            if(Math.abs(star.getX()) > B_WIDTH || Math.abs(star.getY()) > B_WIDTH) {
-                stars.remove(i);
+        for(int i = people.size()-1; i >=0; i--) {
+            person = people.get(i);
+            if(Math.abs(person.getX()) > B_WIDTH || Math.abs(person.getY()) > B_HEIGHT) {
+                people.remove(i);
             }
         }
         
     }
 
-    
     private class TAdapter extends KeyAdapter {
 
         /*@Override
